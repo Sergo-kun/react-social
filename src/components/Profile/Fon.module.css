@@ -1,0 +1,9 @@
+.fon{
+    grid-area: f;
+    position: absolute;
+    width: 991px;
+    height: 190px;
+    left: 264px;
+    bottom: 61%;
+
+}

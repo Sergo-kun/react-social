@@ -1,0 +1,32 @@
+.dialogs{
+    position: static;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    background-color: darkorchid;
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 250%;
+}
+.dialog a{
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+.dialog{
+    padding: 10px;
+}
+.dialog a.active{
+    padding: 10px;
+    color: gold;
+}
+.dialogItems{
+    padding: 10px;
+
+}
+.messages{
+
+}
+.textSend textarea{
+    height: 50px;
+    width: 500px;
+}

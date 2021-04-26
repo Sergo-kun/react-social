@@ -1,0 +1,10 @@
+.login{
+    position: static;
+    background-color: darkorchid;
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 250%;
+}
+.errorLOrP{
+    color: red;
+}
