@@ -3,14 +3,20 @@ import classes from './Login.module.css'
 import { Form, Formik} from "formik";
 import * as Yup from 'yup'
 import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
+
 import {Redirect} from "react-router-dom";
 import {reduxForm} from "redux-form";
+import {login} from "../../redux/auth-reducer";
 
 
 const initialValues = () =>{
     return (
-        { email: '', password: '', checkBox: false}
+        {
+            email: '',
+            password: '',
+            checkBox: false,
+            captcha: ''
+        }
     )
 }
 const validate = (values) =>{
@@ -31,6 +37,7 @@ const validate = (values) =>{
 const LoginForm = (props) =>{
     const onSubmit = (values, { setSubmitting }) => {
         setTimeout(() => {
+
             props.login(values)
         }, 400);
     }
@@ -80,7 +87,15 @@ const LoginForm = (props) =>{
                         onBlur={handleBlur}
                         value={values.checkBox}
                     /><br/>
+                    {props.captcha && <img src={props.captcha}/>}<br/>
+                    {props.captcha && <input
 
+                        type="text"
+                        name="captcha"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.captcha}
+                    />}
 
                     <button type="submit" >
                         Submit
@@ -95,7 +110,7 @@ const LoginForm = (props) =>{
 const Login = (props) => {
     const onSubmit = (formData) => {
 
-        props.login(formData.email, formData.password, formData.checkBox);
+        props.login(formData.email, formData.password, formData.checkBox, formData.captcha);
     }
     if (props.isAuth){
         return <Redirect to={'/profile'}/>
@@ -103,14 +118,17 @@ const Login = (props) => {
     return (
         <div className={classes.login}>
             <h4>Login</h4>
-            <LoginForm isError={props.isError} login={onSubmit}/>
+            <LoginForm captcha={props.captcha} isError={props.isError} login={onSubmit}/>
+
         </div>
     );
 }
 const mapState = (state) => {
+
     return{
         isAuth: state.auth.isAuth,
-        isError: state.auth.isError
+        isError: state.auth.isError,
+        captcha: state.auth.captcha
     }
 }
 

@@ -4,7 +4,7 @@ import classes from "../../components/Users/Users.module.css";
 
 
 let Paginator = ({totalCount, usersCount, activePage, clickPage, portionSize = 10}) => {
-debugger
+
     let pageCount = Math.ceil(totalCount / usersCount)
 
     let pages = [];
@@ -22,7 +22,9 @@ debugger
     return (
         <div className={classes.paginator}>
             { portionNumber > 1 &&
-            <button onClick={() => setPortionNumber(portionNumber-1)}>PREVIOUS</button>
+            <span><button>TO START</button>
+                <button onClick={() => setPortionNumber(portionNumber-1)}>PREVIOUS</button>
+            </span>
             }
 
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -31,7 +33,9 @@ debugger
                              className={activePage === p ? classes.selectedPage : p}>{p} </span>
             })}
             {  portionCount > portionNumber  &&
-            <button onClick={() => setPortionNumber(portionNumber+1)}>NEXT</button>
+           <span> <button onClick={() => setPortionNumber(portionNumber+1)}>NEXT</button>
+               <button onClick={() => clickPage(pageCount)}>TO END</button></span>//костыль
+
             }
         </div>
     )

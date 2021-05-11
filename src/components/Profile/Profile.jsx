@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './Profile.module.css';
 import Post from "./Post";
 import ProfileInfo from "./ProfileInfo";
+import Preloader from "../../common/Preloader";
 
 
 
@@ -24,23 +25,33 @@ let onPostChange = (e) => {
 
 }
 
-    return (
-        <div className={classes.content}>
-            <ProfileInfo
-                status={props.profilePage.status}
-               info={props.profilePage.info}
-                updateStatus={props.updateStatus}
-            />
-            <div className={classes.postText}>
-                <textarea onChange={onPostChange}  value={post}/></div>
-            <div><button onClick={buttonPost}>AddPost</button>
-            </div>
-            <div className={classes.postRez}>
-                {postMap}
-            </div>
 
-        </div>
-    );
+
+
+
+
+            return (
+                <div className={classes.content}>
+                    <ProfileInfo
+                        error={props.profilePage.error}
+                        status={props.profilePage.status}
+                        info={props.profilePage.info}
+                        updateStatus={props.updateStatus}
+                        isOwner={props.isOwner}
+                        addPhoto={props.addPhoto}
+                        saveProfile={props.saveProfile}
+                    />
+                    <div className={classes.postText}>
+                        <textarea onChange={onPostChange} value={post}/></div>
+                    <div>
+                        <button onClick={buttonPost}>AddPost</button>
+                    </div>
+                    <div className={classes.postRez}>
+                        {postMap}
+                    </div>
+                </div>
+            )
+
 }
 
 export default Profile;

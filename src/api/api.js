@@ -18,11 +18,6 @@ export const  getFriendsApi = {
             instance.get(`users?friend=true&page=${activePage}&count=${usersCount}`,{})
 
             )
-
-
-
-
-
     }
 }
 export const getUsersApi = {
@@ -42,14 +37,12 @@ export const getUsersApi = {
 
         }))
     },
-
     follow(id) {
         return( instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}` , {} , {}).
             then(responce => {
                 return responce.data
         }))
     }
-
 }
 export const profileApi ={
     getProfile(userId){
@@ -63,9 +56,34 @@ export const profileApi ={
     },
     updateStatus(status){
         return (
-
             instance.put('profile/status/' , {status : status}))
     },
+    saveProfile(profile){
+
+        return (
+
+            instance.put('profile' , profile))
+    },
+    addPhoto(photo){
+        const data = new FormData()
+        data.append('image',photo)
+        debugger
+        return (
+
+            instance.put('profile/photo/' , data,{
+                "Content-Type": "multipart/form-data"
+            })
+        )
+    }
+
+}
+export const getCaptchaApi = {
+    getCaptcha(){
+        debugger
+        return (
+            instance.get('/security/get-captcha-url')
+        )
+}
 }
 export const getAuthApi = {
     me(){
@@ -74,10 +92,10 @@ export const getAuthApi = {
     )
     },
 
-    login(email, password, rememberMe){
+    login(email, password, rememberMe, captcha){
 
         return(
-            instance.post('auth/login',{email, password, rememberMe})
+            instance.post('auth/login',{email, password, rememberMe, captcha})
         )
     },
     logout(){
